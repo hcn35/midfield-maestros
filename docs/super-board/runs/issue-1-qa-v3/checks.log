@@ -1,0 +1,5 @@
+$ grep -nE '20131|Barcelona|\b41\b|\b11\b|Xavi' maestros/*.py
+(no matches)
+$ wc -l README.md tests/fixtures/xavi_events.jsonl
+14 README.md
+102 tests/fixtures/xavi_events.jsonl

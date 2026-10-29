@@ -1,0 +1,10 @@
+$ .venv/bin/python -m maestros.data --download   # run 1
+31 Barcelona matches cached in <fresh-clone>/data/cache; downloaded 31 this run
+$ .venv/bin/python -m maestros.data --download   # run 2
+31 Barcelona matches cached in <fresh-clone>/data/cache; downloaded 0 this run
+$ ls data/cache/matches
+11-41-barcelona.json
+$ ls data/cache/events | wc -l
+31
+$ git status --porcelain | wc -l   # cache is gitignored
+0
