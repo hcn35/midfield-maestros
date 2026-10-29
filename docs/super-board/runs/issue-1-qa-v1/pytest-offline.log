@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.13, pytest-9.2.0, pluggy-1.7.0 -- <fresh-clone>/.venv/bin/python3.11
+cachedir: .pytest_cache
+rootdir: <fresh-clone>
+configfile: pyproject.toml
+testpaths: tests
+plugins: typeguard-4.6.0, platformdirs-4.14.0
+collecting ... collected 6 items
+
+tests/test_data.py::test_download_saves_only_team_matches PASSED         [ 16%]
+tests/test_data.py::test_second_run_downloads_nothing PASSED             [ 33%]
+tests/test_data.py::test_fixture_is_one_player_one_match_under_200_lines PASSED [ 50%]
+tests/test_data.py::test_player_events_filters_by_settings_player PASSED [ 66%]
+tests/test_settings.py::test_repo_settings_file_holds_xavi_and_2008_09 PASSED [ 83%]
+tests/test_settings.py::test_values_come_from_the_file PASSED            [100%]
+
+============================== 6 passed in 0.02s ===============================

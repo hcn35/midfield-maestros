@@ -1,0 +1,4 @@
+$ wc -l README.md
+      15 README.md
+$ grep -c . README.md   # non-blank
+8

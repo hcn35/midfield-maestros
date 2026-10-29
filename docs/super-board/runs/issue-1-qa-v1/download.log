@@ -1,0 +1,9 @@
+$ python -m maestros.data --download   # run 1
+31 Barcelona matches cached in <fresh-clone>/data/cache; downloaded 31 this run
+$ python -m maestros.data --download   # run 2
+31 Barcelona matches cached in <fresh-clone>/data/cache; downloaded 0 this run
+$ ls data/cache/events | wc -l
+      31
+$ git check-ignore -v data/cache/matches.json
+.gitignore:15:data/cache/	data/cache/matches.json
+$ git status --porcelain   # (empty = nothing to commit)
