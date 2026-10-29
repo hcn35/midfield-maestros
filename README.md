@@ -1,5 +1,4 @@
 # Midfield Maestros
-
 Charts of great midfielders from StatsBomb free open data. Who and which season: `settings.yaml`.
 
 **Install** (Python 3.11+):
