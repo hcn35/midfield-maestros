@@ -1,0 +1,5 @@
+$ PYTHONPATH=<sitecustomize blocking socket connect/getaddrinfo> .venv/bin/pytest -q   # f1bd6f2
+..........                                                               [100%]
+10 passed in 0.02s
+$ socket.create_connection(('github.com',443)) under the same block
+OSError: network blocked by QA

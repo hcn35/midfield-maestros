@@ -1,0 +1,13 @@
+$ fresh clone @ c377655: python3.11 -m venv .venv && .venv/bin/pip install -e '.[dev]' && .venv/bin/pytest
+plugins: typeguard-4.6.0, platformdirs-4.14.0
+collecting ... collected 7 items
+
+tests/test_data.py::test_download_saves_only_team_matches PASSED         [ 14%]
+tests/test_data.py::test_second_run_downloads_nothing PASSED             [ 28%]
+tests/test_data.py::test_fixture_is_one_player_one_match_under_200_lines PASSED [ 42%]
+tests/test_data.py::test_player_events_filters_by_settings_player PASSED [ 57%]
+tests/test_readme.py::test_readme_is_under_15_lines PASSED               [ 71%]
+tests/test_settings.py::test_repo_settings_file_holds_xavi_and_2008_09 PASSED [ 85%]
+tests/test_settings.py::test_values_come_from_the_file PASSED            [100%]
+
+============================== 7 passed in 0.02s ===============================
