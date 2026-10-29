@@ -1,0 +1,4 @@
+$ wc -l README.md
+      14 README.md
+$ python: len(splitlines())
+14

@@ -68,3 +68,12 @@ def test_player_events_filters_by_settings_player():
     other = {"id": "x", "player": {"id": 1}}
     no_player = {"id": "y"}
     assert player_events(events + [other, no_player], SETTINGS.player_id) == events
+
+
+def test_interrupted_download_resumes_missing_matches_only(tmp_path):
+    download(SETTINGS, tmp_path, FakeClient())
+    (tmp_path / "events" / "2.json").unlink()
+    client = FakeClient()
+    assert download(SETTINGS, tmp_path, client) == [2]
+    assert client.match_calls == []
+    assert client.event_calls == [2]
