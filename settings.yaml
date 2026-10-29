@@ -3,4 +3,5 @@ player_id: 20131        # StatsBomb id: Xavier Hernández Creus (Xavi)
 team: Barcelona
 competition_id: 11      # La Liga
 season_id: 41           # 2008/2009
-charts: []
+match_id: 69222          # Barcelona v Recreativo Huelva, 2009-04-11
+charts: [pass_map]
