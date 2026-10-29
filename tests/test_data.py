@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from maestros.data import download, load_events, player_events
+from maestros.data import download, load_events, matches_path, player_events
 from maestros.settings import Settings
 
 FIXTURE = Path(__file__).parent / "fixtures" / "xavi_events.jsonl"
@@ -43,7 +43,7 @@ def test_download_saves_only_team_matches(tmp_path):
     assert sorted(saved) == [1, 2]
     assert client.event_calls == [1, 2]
     assert sorted(p.name for p in (tmp_path / "events").iterdir()) == ["1.json", "2.json"]
-    assert sorted(m["match_id"] for m in json.loads((tmp_path / "matches.json").read_text())) == [1, 2]
+    assert sorted(m["match_id"] for m in json.loads(matches_path(SETTINGS, tmp_path).read_text())) == [1, 2]
     assert load_events(1, tmp_path) == [{"id": "e1", "player": {"id": 20131}}]
 
 
@@ -77,3 +77,19 @@ def test_interrupted_download_resumes_missing_matches_only(tmp_path):
     assert download(SETTINGS, tmp_path, client) == [2]
     assert client.match_calls == []
     assert client.event_calls == [2]
+
+
+def test_changed_season_fetches_its_own_match_list(tmp_path):
+    download(SETTINGS, tmp_path, FakeClient())
+    client = FakeClient()
+    other_season = Settings(player_id=20131, team="Barcelona", competition_id=11, season_id=42, charts=[])
+    assert download(other_season, tmp_path, client) == []  # fake reuses match ids, events already cached
+    assert client.match_calls == [(11, 42)]
+
+
+def test_changed_team_fetches_its_own_match_list(tmp_path):
+    download(SETTINGS, tmp_path, FakeClient())
+    client = FakeClient()
+    sevilla = Settings(player_id=1, team="Sevilla", competition_id=11, season_id=41, charts=[])
+    assert download(sevilla, tmp_path, client) == [3]
+    assert client.match_calls == [(11, 41)]

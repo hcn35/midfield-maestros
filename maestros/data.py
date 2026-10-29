@@ -1,12 +1,13 @@
 """Download StatsBomb open data once and read it back from the local cache.
 
 Cache layout (gitignored):
-    data/cache/matches.json          the team's matches for the season
-    data/cache/events/<match_id>.json  every event of one match
+    data/cache/matches/<competition_id>-<season_id>-<team>.json  the team's matches for the season
+    data/cache/events/<match_id>.json                            every event of one match
 """
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from maestros.settings import ROOT, Settings, load_settings
@@ -29,6 +30,12 @@ def _team_matches(settings: Settings, client) -> list[dict]:
     )
 
 
+def matches_path(settings: Settings, cache_dir: Path = CACHE_DIR) -> Path:
+    """One match list per competition, season and team, so changing settings.yaml never reuses another's."""
+    team = re.sub(r"[^a-z0-9]+", "-", settings.team.lower()).strip("-")
+    return Path(cache_dir) / "matches" / f"{settings.competition_id}-{settings.season_id}-{team}.json"
+
+
 def _statsbomb():
     from statsbombpy import sb  # imported late so offline checks never touch it
 
@@ -41,7 +48,7 @@ def download(settings: Settings, cache_dir: Path = CACHE_DIR, client=None) -> li
     Returns the match ids downloaded on this run.
     """
     cache_dir = Path(cache_dir)
-    matches_file = cache_dir / "matches.json"
+    matches_file = matches_path(settings, cache_dir)
     events_dir = cache_dir / "events"
 
     if matches_file.exists():
@@ -49,7 +56,7 @@ def download(settings: Settings, cache_dir: Path = CACHE_DIR, client=None) -> li
     else:
         client = client or _statsbomb()
         matches = _team_matches(settings, client)
-        cache_dir.mkdir(parents=True, exist_ok=True)
+        matches_file.parent.mkdir(parents=True, exist_ok=True)
         matches_file.write_text(json.dumps(matches))
 
     events_dir.mkdir(parents=True, exist_ok=True)
@@ -85,7 +92,7 @@ def main(argv=None) -> None:
         return
     settings = load_settings()
     new = download(settings)
-    total = len(json.loads((CACHE_DIR / "matches.json").read_text()))
+    total = len(json.loads(matches_path(settings).read_text()))
     print(f"{total} {settings.team} matches cached in {CACHE_DIR}; downloaded {len(new)} this run")
 
 
