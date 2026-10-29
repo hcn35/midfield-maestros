@@ -1,0 +1,6 @@
+$ python -m maestros.charts
+wrote out/pass_map.png
+$ git check-ignore -v out/pass_map.png
+.gitignore:16:out/	out/pass_map.png
+$ PNG size (h, w, ch)
+(1560, 1080, 4)

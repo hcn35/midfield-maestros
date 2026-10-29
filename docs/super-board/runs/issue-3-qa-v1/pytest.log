@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.13, pytest-9.2.0, pluggy-1.7.0 -- /Users/hiep/midfield-maestros/.claude/worktrees/issue-3-qa/.venv/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /Users/hiep/midfield-maestros/.claude/worktrees/issue-3-qa
+configfile: pyproject.toml
+testpaths: tests
+plugins: typeguard-4.6.0, platformdirs-4.14.0
+collecting ... collected 19 items
+
+tests/test_charts.py::test_one_arrow_per_pass_split_by_outcome PASSED    [  5%]
+tests/test_charts.py::test_completed_and_incomplete_use_different_colours_with_legend PASSED [ 10%]
+tests/test_charts.py::test_arrows_go_from_start_to_end_location PASSED   [ 15%]
+tests/test_charts.py::test_title_names_player_both_teams_and_date PASSED [ 21%]
+tests/test_charts.py::test_other_players_passes_are_left_out PASSED      [ 26%]
+tests/test_charts.py::test_png_is_portrait_and_at_least_1080_wide PASSED [ 31%]
+tests/test_charts.py::test_main_reads_player_and_match_from_settings PASSED [ 36%]
+tests/test_charts.py::test_unknown_chart_name_fails_loudly PASSED        [ 42%]
+tests/test_charts.py::test_out_dir_is_gitignored PASSED                  [ 47%]
+tests/test_data.py::test_download_saves_only_team_matches PASSED         [ 52%]
+tests/test_data.py::test_second_run_downloads_nothing PASSED             [ 57%]
+tests/test_data.py::test_fixture_is_one_player_one_match_under_200_lines PASSED [ 63%]
+tests/test_data.py::test_player_events_filters_by_settings_player PASSED [ 68%]
+tests/test_data.py::test_interrupted_download_resumes_missing_matches_only PASSED [ 73%]
+tests/test_data.py::test_changed_season_fetches_its_own_match_list PASSED [ 78%]
+tests/test_data.py::test_changed_team_fetches_its_own_match_list PASSED  [ 84%]
+tests/test_readme.py::test_readme_is_under_15_lines PASSED               [ 89%]
+tests/test_settings.py::test_repo_settings_file_holds_xavi_and_2008_09 PASSED [ 94%]
+tests/test_settings.py::test_values_come_from_the_file PASSED            [100%]
+
+============================== 19 passed in 0.90s ==============================
