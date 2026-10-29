@@ -82,7 +82,9 @@
     "checks": {},
     "human_steps": []
   },
-  "verify_commands": [],
+  "verify_commands": [
+    "python3.11 -m venv .venv && .venv/bin/pip install -e '.[dev]' && .venv/bin/pytest"
+  ],
   "max_workers": 0,
   "collect": {
     "sources": [
