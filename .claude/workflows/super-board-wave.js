@@ -43,6 +43,7 @@ let halted = false
 // Valid form per --kind, from validate() in scripts/super-board-github-read.py (#32).
 const READ_SHAPES = [
   `Read shapes (helper: .claude/bin/super-board-github-read.py --kind <kind> -- <gh args>):`,
+  `- {owner}/{repo} are gh placeholders: pass them exactly as written and gh fills them from the git remote. Never type an owner yourself; the session's email account is not the GitHub account.`,
   `- issue title+body: --kind issue -- issue view <N> --json number,title,body`,
   `- issue comments: --kind comments -- api repos/{owner}/{repo}/issues/<N>/comments --paginate --slurp (zero comments = [[]])`,
   `- other JSON, incl. maybe-empty lists: --kind json -- <gh args> (no --jq that prints a plain string)`,
